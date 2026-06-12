@@ -1,0 +1,35 @@
+{
+  "name": "senai-prova-ds",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx tsx watch src/server.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leehzitha/SENAI-PROVA-ds.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/leehzitha/SENAI-PROVA-ds/issues"
+  },
+  "homepage": "https://github.com/leehzitha/SENAI-PROVA-ds#readme",
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/node": "^25.9.3",
+    "prisma": "^6.19.3",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.19.3",
+    "@types/express": "^5.0.6",
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
+  }
+}
