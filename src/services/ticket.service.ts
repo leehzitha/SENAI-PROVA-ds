@@ -1,9 +1,11 @@
 import { createTicketDTO } from "../dtos/ticket.ts"
-import { Priority, Status } from "../generated/prisma/enums.ts";
+import { Priority, Sector, Status } from "../generated/prisma/enums.ts";
 import { prisma } from "../lib/prisma.ts";
 
 export const createTicket = async(data: createTicketDTO)=>{
     const { title, description, sector, priority, status} = data;
+
+    const sectorEnum = Sector[sector] // nao consegui inserir o proprio elemento do enum ao criar
     return await prisma.ticket.create({
         data: {
             title,
@@ -18,7 +20,11 @@ export const showTickets = async()=>{
     return await prisma.ticket.findMany({});
 }
 export const showTicketById = async(id: number)=>{
-    return await prisma.ticket.findOne({ id })
+    return await prisma.ticket.findFirst({ 
+        where: {
+            id : id
+        }
+    })
 }
 export const updateTicket = async(id: number, data: createTicketDTO)=>{
     const {  title, description, sector, priority, status } = data;
@@ -68,7 +74,7 @@ export const finishTicket = async(id: number)=>{
     })
 }
 
-export const showByPriority = async(priority : String)=>{
+export const showByPriority = async(priority : Priority)=>{
     return await prisma.ticket.findMany({
         where: {
             priority : priority
@@ -76,7 +82,7 @@ export const showByPriority = async(priority : String)=>{
     })
 }
 
-export const showBySector = async(status: String)=>{
+export const showBySector = async(status: Status)=>{
     return await prisma.ticket.findMany({
         where: {
             status : status

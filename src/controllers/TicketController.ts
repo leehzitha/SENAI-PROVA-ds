@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { createTicketDTO } from "../dtos/ticket.ts";
-import { createTicket, deleteTicket, finishTicket, showTicketById, showTickets, startTicket, updateTicket } from "../services/ticket.service.ts";
-import { Status } from "../generated/prisma/enums.ts";
+import { createTicket, deleteTicket, finishTicket, showByPriority, showTicketById, showTickets, startTicket, updateTicket } from "../services/ticket.service.ts";
+import { Priority, Status } from "../generated/prisma/enums.ts";
 
 export default class TicketController{
     static async create(req: Request, res: Response){
@@ -62,7 +62,7 @@ export default class TicketController{
         const id = req.params;
         try {
             const data = await showTicketById(Number(id))
-            if (data.status != Status.ABERTO) {
+             if (data != null && data.status != Status.ABERTO) {
                 return res.status(400).send({ message: "O ticket precisa estar em aberto"});
             }
         }
@@ -83,7 +83,7 @@ export default class TicketController{
         const id = req.params;
         try {
             const data = await showTicketById(Number(id))
-            if (data.status != Status.EM_ANDAMENTO) {
+            if (data != null && data.status != Status.EM_ANDAMENTO) {
                 return res.status(400).send({ message: "O ticket precisa estar em andamento"});
             }
         }
@@ -102,7 +102,17 @@ export default class TicketController{
         }
     }
 
-    static async showByPriority(req: Request, res: Response){}
+    static async showByPriority(req: Request, res: Response){
+        // const pri = req.params;
+        // try {
+        //     const data = await showByPriority(String(pri));
+        //     return res.status(200).send({ data })
+        // }
+
+        // catch {
+        //     return res.status(500).send({ message: "Erro interno"})
+        // }
+    }
     static async showByStatus(req: Request, res: Response){}
     static async showBySector(req: Request, res: Response){}
 };
